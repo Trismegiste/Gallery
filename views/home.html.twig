@@ -37,7 +37,7 @@
                 <tr><td>M</td><td>H</td><td>E</td></tr>
                 <tr><td>E</td><td>O</td><td>R</td></tr>
                 <tr><td>G</td><td>T</td><td>Y</td></tr>
-                <tr><td>I</td><td>O</td><td class="link"><img src="/img/rvb.png"/></td></tr>
+                <tr><td>I</td><td>O</td><td class="link"><img src="/css/rvb.png"/></td></tr>
             </table>
         </div>
     </div>
@@ -54,7 +54,7 @@
             </a>
         </div>
         <div class="pure-u-1-3">
-            <a href="#">
+            <a href="#3" id="cat3">
                 <img src="http://placehold.it/200x200" alt="placeholder image"/>
             </a>
         </div>
@@ -90,8 +90,10 @@
                     options 
                 );
 
-                instance.show(0);
-
+                document.getElementById('cat3').addEventListener('click', function() {
+                    instance.show(0);
+                })
+                
         }, false);
 
 
