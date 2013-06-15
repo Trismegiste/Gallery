@@ -1,0 +1,12 @@
+{
+    "name": "trismegiste/photobook",
+    "require": {
+        "php": ">=5.4",
+        "silex/silex": "1.0.*@dev",
+        "twig/twig": ">=1.8.0,<2.0-dev"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": { "Trismegiste": "src/" }
+    }
+}

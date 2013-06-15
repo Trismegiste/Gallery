@@ -1,0 +1,6 @@
+/vendor/
+/cache/
+silex.log
+/nbproject
+/web/photo
+/web/thumb
