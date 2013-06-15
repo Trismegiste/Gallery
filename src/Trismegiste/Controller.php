@@ -14,7 +14,7 @@ class Controller
 
     public function home(Request $request, Application $app)
     {
-        return "wesh";
+        return $app->render('home.html.twig');
     }
 
 }
