@@ -44,7 +44,7 @@
     <hr/>
     <div class="pure-g-r centering">
         <div class="pure-u-1-3">
-            <a href="#">
+            <a href="#1" id="cat1">
                 <img src="http://placehold.it/200x200" alt="placeholder image"/>
             </a>
         </div>
@@ -73,7 +73,6 @@
 
             var
                 options = {
-                    preventHide: false,
                     getImageSource: function(obj){
                         return obj.url;
                     },
@@ -81,17 +80,31 @@
                         return obj.caption;
                     }
                 },
-                instance = PhotoSwipe.attach( 
+                
+                cat1 = PhotoSwipe.attach( 
                     [
                         { url: '/photo/photo1.jpg', caption: 'Image 001'},
                         { url: '/photo/photo2.jpg', caption: 'Image 001'},
                         { url: '/photo/photo3.jpg', caption: 'Image 001'}
                     ], 
                     options 
+                ),
+
+                cat3 = PhotoSwipe.attach( 
+                    [
+                        { url: '/photo/photo1.jpg', caption: 'Image 001'},
+                        { url: '/photo/photo1.jpg', caption: 'Image 001'},
+                        { url: '/photo/photo3.jpg', caption: 'Image 001'}
+                    ], 
+                    options 
                 );
 
+
+                document.getElementById('cat1').addEventListener('click', function() {
+                    cat1.show(0);
+                })
                 document.getElementById('cat3').addEventListener('click', function() {
-                    instance.show(0);
+                    cat3.show(0);
                 })
                 
         }, false);
