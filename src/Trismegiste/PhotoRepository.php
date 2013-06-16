@@ -33,7 +33,9 @@ class PhotoRepository
 
         $result = [];
         foreach ($f as $entry) {
-            $result[] = '/' . str_replace(DIRECTORY_SEPARATOR, '/', $entry->getRelativePathname());
+            $name = $entry->getRelativePathname();
+            list($subdir, $cat, $rest) = explode(DIRECTORY_SEPARATOR, $name);
+            $result[$cat] = '/' . str_replace(DIRECTORY_SEPARATOR, '/', $name);
         }
 
         return $result;
@@ -41,7 +43,20 @@ class PhotoRepository
 
     public function findAll()
     {
-        
+        $f = new Finder();
+        $f->files()
+                ->in($this->webRoot)
+                ->path($this->photoDir)
+                ->name('*.JPG');
+
+        $result = [];
+        foreach ($f as $entry) {
+            $name = $entry->getRelativePathname();
+            list($subdir, $cat, $rest) = explode(DIRECTORY_SEPARATOR, $name);
+            $result[$cat][] = '/' . str_replace(DIRECTORY_SEPARATOR, '/', $name);
+        }
+
+        return $result;
     }
 
 }

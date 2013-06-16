@@ -43,42 +43,19 @@
 
         document.addEventListener('DOMContentLoaded', function(){
 
-            var
-                options = {
+            var options = {
                     getImageSource: function(obj){
                         return obj.url;
                     },
                     getImageCaption: function(obj){
                         return obj.caption;
                     }
-                },
+                };
                 
-                cat1 = PhotoSwipe.attach( 
-                    [
-                        { url: '/photo/photo1.jpg', caption: 'Image 001'},
-                        { url: '/photo/photo2.jpg', caption: 'Image 001'},
-                        { url: '/photo/photo3.jpg', caption: 'Image 001'}
-                    ], 
-                    options 
-                ),
+            {% for idx, listing in gallery %}
+                {% include 'gallery.js.twig' %}
+            {% endfor %}
 
-                cat3 = PhotoSwipe.attach( 
-                    [
-                        { url: '/photo/photo1.jpg', caption: 'Image 001'},
-                        { url: '/photo/photo1.jpg', caption: 'Image 001'},
-                        { url: '/photo/photo3.jpg', caption: 'Image 001'}
-                    ], 
-                    options 
-                );
-
-
-                document.getElementById('cat1').addEventListener('click', function() {
-                    cat1.show(0);
-                })
-                document.getElementById('cat3').addEventListener('click', function() {
-                    cat3.show(0);
-                })
-                
         }, false);
 
 

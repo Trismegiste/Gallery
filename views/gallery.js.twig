@@ -1,0 +1,13 @@
+var cat{{ idx }} = PhotoSwipe.attach(
+        [
+            {% for photo in listing %}
+            {url: '{{ photo }}', caption: 'Image 001'}
+            {% if not loop.last %},{% endif %}
+            {% endfor %}
+        ],
+        options
+        );
+
+document.getElementById('cat{{ idx }}').addEventListener('click', function() {
+    cat{{ idx }}.show(0);
+});
