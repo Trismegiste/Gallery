@@ -15,4 +15,10 @@ class AppKernel extends Application
 {
 
     use Application\TwigTrait;
+
+    public function getRepo()
+    {
+        return $this['repository'];
+    }
+
 }

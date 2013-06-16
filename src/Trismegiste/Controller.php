@@ -14,7 +14,9 @@ class Controller
 
     public function home(Request $request, Application $app)
     {
-        return $app->render('home.html.twig');
+        $param['category'] = $app->getRepo()->findCategory();
+
+        return $app->render('home.html.twig', $param);
     }
 
 }
