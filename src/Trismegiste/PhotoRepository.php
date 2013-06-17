@@ -25,38 +25,46 @@ class PhotoRepository
 
     public function findCategory()
     {
-        $f = new Finder();
-        $f->files()
-                ->in($this->webRoot)
-                ->path($this->photoDir)
-                ->name('category.png');
-
         $result = [];
-        foreach ($f as $entry) {
-            $name = $entry->getRelativePathname();
-            list($subdir, $cat, $rest) = explode(DIRECTORY_SEPARATOR, $name);
-            $result[$cat] = '/' . str_replace(DIRECTORY_SEPARATOR, '/', $name);
-        }
+        $fnd = $this->getDefaultFinder()->name('category.png');
+
+        $this->genericScan($fnd, function($categ, $name) use (&$result) {
+                    $result[$categ] = $name;
+                });
 
         return $result;
     }
 
     public function findAll()
     {
+        $result = [];
+        $fnd = $this->getDefaultFinder()->name('*.jpg');
+
+        $this->genericScan($fnd, function($categ, $name) use (&$result) {
+                    $result[$categ][] = $name;
+                });
+
+        return $result;
+    }
+
+    protected function getDefaultFinder()
+    {
         $f = new Finder();
         $f->files()
                 ->in($this->webRoot)
-                ->path($this->photoDir)
-                ->name('*.JPG');
+                ->path('#' . $this->photoDir . '/\d/#')
+                ->sortByName();
 
-        $result = [];
-        foreach ($f as $entry) {
+        return $f;
+    }
+
+    protected function genericScan(Finder $fnd, \Closure $callback)
+    {
+        foreach ($fnd as $entry) {
             $name = $entry->getRelativePathname();
             list($subdir, $cat, $rest) = explode(DIRECTORY_SEPARATOR, $name);
-            $result[$cat][] = '/' . str_replace(DIRECTORY_SEPARATOR, '/', $name);
+            call_user_func($callback, $cat, '/' . str_replace(DIRECTORY_SEPARATOR, '/', $name));
         }
-
-        return $result;
     }
 
 }
