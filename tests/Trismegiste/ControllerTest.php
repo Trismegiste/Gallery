@@ -24,11 +24,7 @@ class ControllerTest extends WebTestCase
 
     public function createApplication()
     {
-        require dirname(__DIR__) . '/../web/index.php';
-        $app['debug'] = true;
-        $app['exception_handler']->disable();
-
-        return $app;
+        return new \Trismegiste\AppKernel(['debug' => true, 'webdir' => dirname(__DIR__)]);
     }
 
 }
