@@ -9,5 +9,8 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-0": { "Trismegiste": "src/" }
+    },
+    "require-dev": {
+        "symfony/browser-kit": "2.3.*"
     }
 }
