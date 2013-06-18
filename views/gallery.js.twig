@@ -1,7 +1,7 @@
 var cat{{ idx }} = PhotoSwipe.attach(
         [
             {% for photo in listing %}
-            {url: '{{ photo }}', caption: 'Image 001'}
+            {url: '{{ photo.url }}', caption: '{{ photo.caption }}'}
             {% if not loop.last %},{% endif %}
             {% endfor %}
         ],

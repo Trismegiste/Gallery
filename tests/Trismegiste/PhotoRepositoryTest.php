@@ -28,7 +28,7 @@ class PhotoRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testGallery()
     {
         $cat = $this->repo->findAll();
-        $this->assertEquals([1 => [0 => '/photo/1/img.jpg']], $cat);
+        $this->assertEquals([1 => [0 => ['url' => '/photo/1/img.jpg', 'caption' => 'img']]], $cat);
     }
 
 }

@@ -35,13 +35,18 @@ class PhotoRepository
         return $result;
     }
 
+    protected function humanize($filepath)
+    {
+        return str_replace('_', ' ', basename($filepath, '.jpg'));
+    }
+
     public function findAll()
     {
         $result = [];
         $fnd = $this->getDefaultFinder()->name('*.jpg');
 
         $this->genericScan($fnd, function($categ, $name) use (&$result) {
-                    $result[$categ][] = $name;
+                    $result[$categ][] = ['url' => $name, 'caption' => $this->humanize($name)];
                 });
 
         return $result;
