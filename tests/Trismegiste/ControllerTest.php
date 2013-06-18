@@ -20,6 +20,9 @@ class ControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertTrue($client->getResponse()->isOk());
+        $result = $crawler->filterXPath('//div/a[@id]/img');
+        $this->assertCount(1, $result);
+        $this->assertEquals('/fixtures/photo/1/category.png', $result->attr('src'));
     }
 
     public function createApplication()
