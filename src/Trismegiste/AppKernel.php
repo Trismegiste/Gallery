@@ -28,7 +28,7 @@ class AppKernel extends Application
         ]);
 
         $this['repository'] = function ($app) {
-                    return new PhotoRepository($app['webdir'], 'photo');
+                    return new PhotoRepository($app['webdir']);
                 };
 
         // routes

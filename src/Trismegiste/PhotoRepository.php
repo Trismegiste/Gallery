@@ -17,10 +17,10 @@ class PhotoRepository
     protected $webRoot;
     protected $photoDir;
 
-    public function __construct($webdir, $photodir)
+    public function __construct($webdir, $photoSubdir = 'photo')
     {
         $this->webRoot = $webdir;
-        $this->photoDir = $photodir;
+        $this->photoDir = $photoSubdir;
     }
 
     public function findCategory()
