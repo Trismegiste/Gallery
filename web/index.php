@@ -4,6 +4,6 @@
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-$app = new Trismegiste\AppKernel(['debug' => true, 'webdir' => __DIR__]);
+$app = new Trismegiste\AppKernel(['debug' => false, 'webdir' => __DIR__]);
 
 $app->run();
