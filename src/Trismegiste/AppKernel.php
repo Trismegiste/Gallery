@@ -27,17 +27,12 @@ class AppKernel extends Application
             'twig.options' => ['cache' => dirname($this['webdir']) . '/cache']
         ]);
 
-        $this['repository'] = function ($app) {
+        $this['repository'] = $this->share(function ($app) {
                     return new PhotoRepository($app['webdir']);
-                };
+                });
 
         // routes
         $this->get('/', 'Trismegiste\Controller::home');
-    }
-
-    public function getRepo()
-    {
-        return $this['repository'];
     }
 
 }
