@@ -9,7 +9,7 @@ namespace Trismegiste;
 use Symfony\Component\Finder\Finder;
 
 /**
- * PhotoRepository is a dao for photos
+ * PhotoRepository is a readonly dao for photos
  */
 class PhotoRepository
 {
@@ -23,6 +23,11 @@ class PhotoRepository
         $this->photoDir = $photoSubdir;
     }
 
+    /**
+     * Finds all categories in photo directory
+     * 
+     * @return array
+     */
     public function findCategory()
     {
         $result = [];
@@ -35,6 +40,12 @@ class PhotoRepository
         return $result;
     }
 
+    /**
+     * Gets a caption from a filepath
+     * 
+     * @param string $filepath
+     * @return string
+     */
     protected function humanize($filepath)
     {
         return str_replace('_', ' ', basename($filepath, '.jpg'));
@@ -52,6 +63,11 @@ class PhotoRepository
         return $result;
     }
 
+    /**
+     * Builds a finder with default value for stuff in webdir
+     * 
+     * @return \Symfony\Component\Finder\Finder
+     */
     protected function getDefaultFinder()
     {
         $f = new Finder();
