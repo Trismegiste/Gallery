@@ -7,15 +7,11 @@
 namespace Trismegiste;
 
 use Silex\Application;
+use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class Controller
+class Controller implements ControllerProviderInterface
 {
-
-    protected function getRepo()
-    {
-        return $app['repository'];
-    }
 
     public function home(Request $request, Application $app)
     {
@@ -27,6 +23,15 @@ class Controller
         $param['gallery'] = $app['repository']->findAll();
 
         return $app->render('home.html.twig', $param);
+    }
+
+    public function connect(Application $app)
+    {
+        // creates a new controller based on the default route
+        $controllers = $app['controllers_factory'];
+        $controllers->get('/', __CLASS__ . '::home');
+
+        return $controllers;
     }
 
 }

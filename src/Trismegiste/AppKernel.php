@@ -32,7 +32,7 @@ class AppKernel extends Application
                 });
 
         // routes
-        $this->get('/', 'Trismegiste\Controller::home');
+        $this->mount('/', new Controller());
     }
 
 }
