@@ -14,6 +14,11 @@ use Silex\WebTestCase;
 class ControllerTest extends WebTestCase
 {
 
+    public function createApplication()
+    {
+        return new \Trismegiste\AppKernel(['debug' => true, 'webdir' => dirname(__DIR__)]);
+    }
+
     public function testHomeContent()
     {
         $client = $this->createClient();
@@ -26,9 +31,12 @@ class ControllerTest extends WebTestCase
         $this->assertRegExp('#img\.jpg#', $client->getResponse()->getContent());
     }
 
-    public function createApplication()
+    public function testGoogleDenied()
     {
-        return new \Trismegiste\AppKernel(['debug' => true, 'webdir' => dirname(__DIR__)]);
+        $client = $this->createClient(['HTTP_USER_AGENT' => 'googlebot']);
+        $crawler = $client->request('GET', '/');
+
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 
 }

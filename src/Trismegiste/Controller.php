@@ -9,6 +9,7 @@ namespace Trismegiste;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Main controller
@@ -26,10 +27,6 @@ class Controller implements ControllerProviderInterface
      */
     public function home(Request $request, Application $app)
     {
-        if (preg_match('#googlebot#i', $request->server->get('HTTP_USER_AGENT'))) {
-            $app->abort(404);
-        }
-
         $param['category'] = $app['repository']->findCategory();
         $param['gallery'] = $app['repository']->findAll();
 
@@ -43,7 +40,13 @@ class Controller implements ControllerProviderInterface
     {
         // creates a new controller based on the default route
         $controllers = $app['controllers_factory'];
-        $controllers->get('/', __CLASS__ . '::home');
+
+        $controllers->before(function(Request $request) {
+                            if (preg_match('#googlebot#i', $request->server->get('HTTP_USER_AGENT'))) {
+                                throw new HttpException(404);
+                            }
+                        })
+                ->get('/', __CLASS__ . '::home');
 
         return $controllers;
     }
