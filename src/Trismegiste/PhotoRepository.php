@@ -54,7 +54,7 @@ class PhotoRepository
     public function findAll()
     {
         $result = [];
-        $fnd = $this->getDefaultFinder()->name('*.jpg');
+        $fnd = $this->getDefaultFinder()->name('#\.jpg$#i');
 
         $this->genericScan($fnd, function($categ, $name) use (&$result) {
                     $result[$categ][] = ['url' => $name, 'caption' => $this->humanize($name)];
