@@ -44,11 +44,13 @@
 
             var options = {
                     getImageSource: function(obj){
-                        return obj.url;
+                        return obj.url
                     },
                     getImageCaption: function(obj){
-                        return obj.caption;
-                    }
+                        return ''
+                    },
+                    slideshowDelay: 4000,
+                    captionAndToolbarShowEmptyCaptions: false
                 };
                 
             {% for idx, listing in gallery %}
